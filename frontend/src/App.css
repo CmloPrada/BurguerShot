@@ -16,7 +16,7 @@ body {
   flex-direction: column;
 }
 
-/* Header */
+
 .app-header {
   background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
   color: white;
@@ -35,7 +35,6 @@ body {
   opacity: 0.9;
 }
 
-/* Container */
 .app-container {
   flex: 1;
   max-width: 1400px;
@@ -47,7 +46,6 @@ body {
   gap: 2rem;
 }
 
-/* Loading & Error */
 .loading, .error {
   text-align: center;
   padding: 4rem 2rem;
@@ -58,7 +56,6 @@ body {
   color: #d32f2f;
 }
 
-/* Menu Section */
 .menu-section {
   background: white;
   border-radius: 12px;
@@ -95,7 +92,6 @@ body {
   gap: 1.5rem;
 }
 
-/* Product Card */
 .product-card {
   background: white;
   border: 1px solid #e0e0e0;
@@ -167,7 +163,6 @@ body {
   background: #ee5a6f;
 }
 
-/* Cart Section */
 .cart-section {
   position: sticky;
   top: 2rem;
@@ -308,7 +303,6 @@ body {
   background: #45a049;
 }
 
-/* Checkout Form */
 .checkout-section {
   grid-column: 1 / -1;
   max-width: 800px;
@@ -470,7 +464,6 @@ body {
   background: #45a049;
 }
 
-/* Order Confirmation */
 .confirmation-section {
   grid-column: 1 / -1;
   max-width: 600px;
@@ -578,7 +571,6 @@ body {
   background: #ee5a6f;
 }
 
-/* Footer */
 .app-footer {
   background: #333;
   color: white;
@@ -587,7 +579,7 @@ body {
   margin-top: auto;
 }
 
-/* Responsive */
+
 @media (max-width: 1024px) {
   .app-container {
     grid-template-columns: 1fr;

@@ -83,7 +83,7 @@ class OrderAdmin(admin.ModelAdmin):
     
     def get_readonly_fields(self, request, obj=None):
         """Hacer algunos campos de solo lectura después de crear el pedido"""
-        if obj:  # Editando pedido existente
+        if obj:  # Editando un pedido existente
             return self.readonly_fields + ['customer_name', 'customer_phone', 
-                                          'delivery_type', 'payment_method']
+            'delivery_type', 'payment_method']
         return self.readonly_fields

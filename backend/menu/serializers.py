@@ -3,15 +3,13 @@ from .models import Category, Product, Order, OrderItem
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    """Serializador para categorías"""
-    
+
     class Meta:
         model = Category
         fields = ['id', 'name', 'description', 'order']
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    """Serializador para productos"""
     category_name = serializers.CharField(source='category.name', read_only=True)
     
     class Meta:
@@ -24,7 +22,6 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    """Serializador para ítems de pedido"""
     product_name = serializers.CharField(source='product.name', read_only=True)
     subtotal = serializers.DecimalField(max_digits=10, decimal_places=2, read_only=True)
     
@@ -34,7 +31,6 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    """Serializador para pedidos"""
     items = OrderItemSerializer(many=True)
     payment_method_display = serializers.CharField(source='get_payment_method_display', read_only=True)
     delivery_type_display = serializers.CharField(source='get_delivery_type_display', read_only=True)
@@ -61,13 +57,12 @@ class OrderSerializer(serializers.ModelSerializer):
         return order
     
     def validate(self, data):
-        """Validaciones personalizadas"""
         # Si es delivery, la dirección es obligatoria
         if data.get('delivery_type') == 'delivery' and not data.get('address'):
             raise serializers.ValidationError({
                 'address': 'La dirección es obligatoria para pedidos con delivery.'
             })
-        
+    
         # Validar que hay ítems en el pedido
         items = data.get('items', [])
         if not items:
@@ -83,7 +78,6 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class OrderCreateSerializer(serializers.ModelSerializer):
-    """Serializador simplificado para crear pedidos desde el frontend"""
     items = OrderItemSerializer(many=True)
     
     class Meta:
@@ -111,7 +105,6 @@ class OrderCreateSerializer(serializers.ModelSerializer):
         return order
     
     def validate(self, data):
-        """Validaciones personalizadas"""
         # Si es delivery, la dirección es obligatoria
         if data.get('delivery_type') == 'delivery' and not data.get('address'):
             raise serializers.ValidationError({

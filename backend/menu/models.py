@@ -3,7 +3,6 @@ from django.core.validators import MinValueValidator
 
 
 class Category(models.Model):
-    """Categoría de productos (Hamburguesas, Bebidas, Acompañamientos, etc.)"""
     name = models.CharField(max_length=100, verbose_name="Nombre")
     description = models.TextField(blank=True, verbose_name="Descripción")
     order = models.IntegerField(default=0, verbose_name="Orden")
@@ -18,7 +17,6 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    """Producto del menú"""
     name = models.CharField(max_length=200, verbose_name="Nombre")
     description = models.TextField(verbose_name="Descripción")
     price = models.DecimalField(
@@ -81,25 +79,21 @@ class Order(models.Model):
     customer_phone = models.CharField(max_length=20, verbose_name="Teléfono")
     customer_email = models.EmailField(blank=True, verbose_name="Email")
     
-    # Tipo de entrega
     delivery_type = models.CharField(
         max_length=10,
         choices=DELIVERY_TYPES,
         verbose_name="Tipo de Entrega"
     )
     
-    # Dirección (solo para delivery)
     address = models.TextField(blank=True, verbose_name="Dirección")
     address_notes = models.TextField(blank=True, verbose_name="Notas de Dirección")
     
-    # Método de pago
     payment_method = models.CharField(
         max_length=20,
         choices=PAYMENT_METHODS,
         verbose_name="Método de Pago"
     )
     
-    # Estado y total
     status = models.CharField(
         max_length=20,
         choices=STATUS_CHOICES,
@@ -130,7 +124,6 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    """Ítem individual dentro de un pedido"""
     order = models.ForeignKey(
         Order,
         on_delete=models.CASCADE,

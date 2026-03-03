@@ -9,19 +9,16 @@ from .serializers import (
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet para listar categorías"""
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet para listar y ver productos"""
     queryset = Product.objects.filter(available=True)
     serializer_class = ProductSerializer
     
     @action(detail=False, methods=['get'])
     def by_category(self, request):
-        """Obtener productos agrupados por categoría"""
         categories = Category.objects.prefetch_related('products').all()
         result = []
         
@@ -39,17 +36,14 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class OrderViewSet(viewsets.ModelViewSet):
-    """ViewSet para crear y listar pedidos"""
     queryset = Order.objects.all()
     
     def get_serializer_class(self):
-        """Usar diferentes serializadores según la acción"""
         if self.action == 'create':
             return OrderCreateSerializer
         return OrderSerializer
     
     def create(self, request, *args, **kwargs):
-        """Crear un nuevo pedido"""
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         order = serializer.save()
@@ -63,7 +57,6 @@ class OrderViewSet(viewsets.ModelViewSet):
     
     @action(detail=True, methods=['patch'])
     def update_status(self, request, pk=None):
-        """Actualizar el estado de un pedido"""
         order = self.get_object()
         new_status = request.data.get('status')
         

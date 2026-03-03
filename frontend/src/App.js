@@ -12,7 +12,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentStep, setCurrentStep] = useState('menu'); // menu, checkout, confirmation
+  const [currentStep, setCurrentStep] = useState('menu');
   const [confirmedOrder, setConfirmedOrder] = useState(null);
 
   useEffect(() => {
